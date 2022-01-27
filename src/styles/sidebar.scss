@@ -1,0 +1,214 @@
+.app__sidebar {
+  width: 25%;
+  border-left: 1px solid $gray_text;
+  color: #fff;
+  background-color: $graphite_dark;
+  .sidebar__header.column_header {
+    justify-content: flex-start;
+    border-bottom: 1px solid $gray_text;
+    .sidebar-header__title {
+      margin-left: 2em;
+    }
+  }
+  .button {
+    &.close-sb {
+      background-image: url("../images/close-line.svg");
+    }
+  }
+}
+
+//сайдбар поиска сообщений
+.app__sidebar.search-mes {
+  .sidebar__found-list {
+    height: 77vh;
+    overflow: auto;
+    .found-list__found {
+      padding: 1em;
+      border-bottom: 1px solid $gray_text;
+      cursor: pointer;
+      &:hover {
+        background-color: $graphite_regular;
+      }
+      &.checked {
+        background-color: $graphite_regular;
+        border-right: 10px solid $gray_text;
+        /* background-image: url("../images/1613303802.jpg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        box-shadow: inset 0px 0px 5px $shadow; */
+      }
+    }
+    .found__title {
+      display: flex;
+      justify-content: space-between;
+      .found__time {
+        font-size: 0.8rem;
+        margin-right: 1em;
+      }
+    }
+    .found__content {
+      margin-top: 0.8em;
+      font-size: 0.9rem;
+      color: $gray_text;
+      .marker {
+        color: $success-color;
+      }
+    }
+  }
+}
+
+// сайдбар информация о чате
+.app__sidebar.info {
+  .sidebar__attachments-list {
+    margin-top: 1em;
+  }
+  .attachment {
+    padding: 1em 0 1em 1.6em;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    &:hover {
+      background-color: $graphite_regular;
+    }
+  }
+  .attachment__item {
+    display: flex;
+    align-items: center;
+  }
+  .attachment__number {
+    display: flex;
+    align-items: center;
+    width: 4em;
+  }
+  .attachment__icon {
+    width: 1.5em;
+    height: 1.5em;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    &.photo {
+      background-image: url("../images/image-line.svg");
+    }
+    &.video {
+      background-image: url("../images/vidicon-line.svg");
+    }
+    &.file {
+      background-image: url("../images/file-line.svg");
+    }
+    &.audio {
+      background-image: url("../images/headphone-line.svg");
+    }
+    &.link {
+      background-image: url("../images/links-line.svg");
+    }
+    &.voice {
+      background-image: url("../images/mic-line.svg");
+    }
+    &.gif {
+      background-image: url("../images/file-gif-line.svg");
+    }
+  }
+  .attachment__text {
+    margin-left: 2.6em;
+  }
+  .sidebar__preview {
+    .sidebar-preview__header {
+      display: flex;
+      align-items: center;
+      padding: 1em;
+      .btn-wrap {
+        &:hover {
+          background-color: $graphite_regular;
+        }
+      }
+      .button {
+        &.back {
+          background-image: url("../images/arrow-left-white.svg");
+        }
+      }
+      .sidebar-preview__title {
+        margin-left: 2em;
+      }
+    }
+    .sidebar-preview__photo {
+      height: 75vh;
+      overflow: auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(300, 7.5em);
+      gap: 5px;
+      .photo__item img {
+        max-width: 100%;
+        min-height: 100%;
+        /* background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        background-image: url("../images/gotham_piramidy_v_egipte_1400x1050.jpg"); */
+      }
+    }
+    .sidebar-preview__video {
+      height: 75vh;
+      overflow: auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(300, 7.5em);
+      gap: 5px;
+      .video__item video {
+        width: 7.5em;
+        height: 100%;
+      }
+    }
+    .sidebar-preview__voice,
+    .sidebar-preview__audio {
+      height: 75vh;
+      overflow: auto;
+      .voice__item {
+        display: flex;
+        padding: 0 1em;
+        &:nth-child(n + 2) {
+          margin-top: 1em;
+        }
+        .button.download {
+          display: inline-block;
+          width: 2em;
+          height: 2em;
+          background-image: url("../images/download-2-line.svg");
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: contain;
+        }
+      }
+    }
+    .sidebar-preview__link {
+      height: 75vh;
+      overflow: auto;
+      .link__item {
+        padding: 0 1em;
+        display: flex;
+        // align-items: center;
+        &:nth-child(n + 2) {
+          margin-top: 1.5em;
+        }
+        .link-item__img {
+          min-width: 2em;
+          min-height: 2em;
+          background-image: url('../images/links-line.svg');
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: contain;
+        }
+        .link-item__content {
+          margin-left: 1em;
+          word-break: break-word;
+        }
+        .link-item__link {
+          margin-top: .5em;
+          & a {
+            color: $success-color;
+          }
+        }
+      }
+    }
+  }
+}

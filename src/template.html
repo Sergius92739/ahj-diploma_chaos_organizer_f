@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>
+    <%= htmlWebpackPlugin.options.title %>
+  </title>
+</head>
+
+<body>
+  <div class="app">
+    <!-- <h1 class="app__title">Chaos Organizer</h1>
+    <div class="app__content">
+      <div class="app__chats">
+        <div class="chats__header column_header">
+          <div class="chat-header__user">
+            <div class="chats-header__avatar"></div>
+            <div class="chat-header__name">Sergei Emelianov</div>
+          </div>
+          <div class="btn-wrap">
+            <button class="button logout"></button>
+          </div>
+        </div>
+        <ul class="chats__group-list">
+          <li class="general__chat chat active">
+            <div class="chat__content">
+              <div class="chat-content__header">
+                <div class="chat-content__title">Общий чат</div>
+                <div class="chat-content__time"></div>
+              </div>
+              <div class="chat-content__preview">
+                <span class="preview__checkbox"></span>
+                <span class="preview__text"></span>
+              </div>
+            </div>
+          </li>
+        </ul>
+        <form class="chats__search search" action="">
+          <label class="search__items">
+            <button class="search__button_on"></button>
+            <button class="search__button_of d_none"></button>
+            <input type="text" class="search__input" placeholder="Поиск по чатам">
+          </label>
+        </form>
+        <ul class="chats__list">
+          <li class="chats__chat chat active">
+            <div class="chat__avatar"></div>
+            <div class="chat__content">
+              <div class="chat-content__header">
+                <div class="chat-content__title">Ева Теле2</div>
+                <div class="chat-content__time">19:08</div>
+              </div>
+              <div class="chat-content__preview">
+                <span class="preview__checkbox viewed"></span>
+                <span class="preview__text">Привет, как дела?</span>
+              </div>
+            </div>
+          </li>
+          <li class="chats__chat chat">
+            <div class="chat__avatar"></div>
+            <div class="chat__content">
+              <div class="chat-content__header">
+                <div class="chat-content__title">Чингиз</div>
+                <div class="chat-content__time">16:07</div>
+              </div>
+              <div class="chat-content__preview">
+                <span class="preview__checkbox viewed"></span>
+                <span class="preview__text">Через 30 мин позвоню</span>
+              </div>
+            </div>
+          </li>
+          <li class="chats__chat chat">
+            <div class="chat__avatar"></div>
+            <div class="chat__content">
+              <div class="chat-content__header">
+                <div class="chat-content__title">Мама</div>
+                <div class="chat-content__time">22:41</div>
+              </div>
+              <div class="chat-content__preview">
+                <span class="preview__checkbox viewed"></span>
+                <span class="preview__text">Отлично!</span>
+              </div>
+            </div>
+          </li>
+          <li class="chats__chat chat">
+            <div class="chat__avatar"></div>
+            <div class="chat__content">
+              <div class="chat-content__header">
+                <div class="chat-content__title">Ева Теле2</div>
+                <div class="chat-content__time">20:36</div>
+              </div>
+              <div class="chat-content__preview">
+                <span class="preview__checkbox"></span>
+                <span class="preview__text">Уже еду</span>
+              </div>
+            </div>
+          </li>
+          <li class="chats__chat chat">
+            <div class="chat__avatar"></div>
+            <div class="chat__content">
+              <div class="chat-content__header">
+                <div class="chat-content__title">Чингиз</div>
+                <div class="chat-content__time">16:07</div>
+              </div>
+              <div class="chat-content__preview">
+                <span class="preview__checkbox viewed"></span>
+                <span class="preview__text">Через 30 мин позвоню</span>
+              </div>
+            </div>
+          </li>
+          <li class="chats__chat chat">
+            <div class="chat__avatar"></div>
+            <div class="chat__content">
+              <div class="chat-content__header">
+                <div class="chat-content__title">Чингиз</div>
+                <div class="chat-content__time">16:07</div>
+              </div>
+              <div class="chat-content__preview">
+                <span class="preview__checkbox viewed"></span>
+                <span class="preview__text">Через 30 мин позвоню</span>
+              </div>
+            </div>
+          </li>
+          <li class="chats__chat chat">
+            <div class="chat__avatar"></div>
+            <div class="chat__content">
+              <div class="chat-content__header">
+                <div class="chat-content__title">Чингиз</div>
+                <div class="chat-content__time">16:07</div>
+              </div>
+              <div class="chat-content__preview">
+                <span class="preview__checkbox viewed"></span>
+                <span class="preview__text">Через 30 мин позвоню</span>
+              </div>
+            </div>
+          </li>
+          <li class="chats__chat chat">
+            <div class="chat__avatar"></div>
+            <div class="chat__content">
+              <div class="chat-content__header">
+                <div class="chat-content__title">Чингиз</div>
+                <div class="chat-content__time">16:07</div>
+              </div>
+              <div class="chat-content__preview">
+                <span class="preview__checkbox viewed"></span>
+                <span class="preview__text">Через 30 мин позвоню</span>
+              </div>
+            </div>
+          </li>
+          <li class="chats__chat chat">
+            <div class="chat__avatar"></div>
+            <div class="chat__content">
+              <div class="chat-content__header">
+                <div class="chat-content__title">Чингиз</div>
+                <div class="chat-content__time">16:07</div>
+              </div>
+              <div class="chat-content__preview">
+                <span class="preview__checkbox viewed"></span>
+                <span class="preview__text">Через 30 мин позвоню</span>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="app__messages">
+        <div class="messages__header column_header">
+          <div class="messages-header__info">
+            <div class="messages-header__title">Общий чат</div>
+            <span class="messages-header__text">Всего участников:</span>
+            <span class="messages-header__number">8</span>
+          </div>
+          <div class="messages-header__buttons">
+            <div class="btn-wrap">
+              <button class="button find"></button>
+            </div>
+            <div class="btn-wrap">
+              <button class="button menu"></button>
+            </div>
+          </div>
+        </div>
+
+        <ul class="messages__content">
+          <li class="message left">
+            <div class="message__body">
+              <div class="message__header">
+                <div class="message__name">Sergei</div>
+                <div class="message__date">15:23 12.12.2022</div>
+              </div>
+              <div class="message__preview-file file-preview">
+                <div class="file-preview__body">
+                  <div class="btn-wrap">
+                    <a class="button download"></a>
+                  </div>
+                  <div class="message__file">
+                    <audio src="" controls></audio>
+                  </div>
+                </div>
+              </div>
+              <div class="message__content">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate nam molestiae cumque earum illum
+                dolores repellendus alias voluptas maiores commodi?
+              </div>
+            </div>
+          </li>
+          <li class="message right">
+            <div class="message__body">
+              <div class="message__header">
+                <div class="message__name">Sergei</div>
+                <div class="message__date">15:23 12.12.2022</div>
+              </div>
+              <div class="message__preview-file file-preview">
+                <div class="file-preview__body">
+                  <div class="btn-wrap">
+                    <a class="button download"></a>
+                  </div>
+                  <div class="message__file">
+                    <audio src="" controls></audio>
+                  </div>
+                </div>
+              </div>
+              <div class="message__content">
+                Lorem.
+              </div>
+            </div>
+          </li>
+          <li class="message left">
+            <div class="message__body">
+              <div class="message__header">
+                <div class="message__name">Sergei</div>
+                <div class="message__date">15:23 12.12.2022</div>
+              </div>
+              <div class="message__preview-file file-preview">
+                <div class="file-preview__body">
+                  <div class="btn-wrap">
+                    <a class="button download"></a>
+                  </div>
+                  <div class="message__file">
+                    <video src="" width="450" height="300" controls></video>
+                  </div>
+                </div>
+              </div>
+              <div class="message__content">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, eveniet.
+              </div>
+            </div>
+          </li>
+          <li class="message right">
+            <div class="message__body">
+              <div class="message__header">
+                <div class="message__name">Sergei</div>
+                <div class="message__date">15:23 12.12.2022</div>
+              </div>
+              <div class="message__preview-file file-preview">
+                <div class="file-preview__body">
+                  <div class="btn-wrap">
+                    <a class="button download"></a>
+                  </div>
+                  <div class="message__file">
+                    <video src="" controls></video>
+                  </div>
+                </div>
+              </div>
+              <div class="message__content"></div>
+            </div>
+          </li>
+          <li class="message left">
+            <div class="message__body">
+              <div class="message__header">
+                <div class="message__name">Sergei</div>
+                <div class="message__date">15:23 12.12.2022</div>
+              </div>
+              <div class="message__content">
+                Lorem.
+              </div>
+            </div>
+          </li>
+          <li class="message right">
+            <div class="message__body">
+              <div class="message__header">
+                <div class="message__name">Sergei</div>
+                <div class="message__date">15:23 12.12.2022</div>
+              </div>
+              <div class="message__content">
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Libero, autem.
+              </div>
+            </div>
+          </li>
+          <li class="message left">
+            <div class="message__body">
+              <div class="message__header">
+                <div class="message__name">Sergei</div>
+                <div class="message__date">15:23 12.12.2022</div>
+              </div>
+              <div class="message__content">
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aut ipsa, dolore deserunt eveniet ducimus nam
+                illo, doloribus, quam cum consequuntur voluptatem a veritatis mollitia sit.
+              </div>
+            </div>
+          </li>
+          <li class="message right">
+            <div class="message__body">
+              <div class="message__header">
+                <div class="message__name">Sergei</div>
+                <div class="message__date">15:23 12.12.2022</div>
+              </div>
+              <div class="message__content lock">
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aut ipsa, dolore deserunt eveniet ducimus nam
+                illo, doloribus, quam cum consequuntur voluptatem a veritatis mollitia sit.
+              </div>
+              <div class="btn-wrap lock checked">
+                <button class="button mail_lock"></button>
+              </div>
+            </div>
+          </li>
+          <li class="message right">
+            <div class="message__body">
+              <div class="message__header">
+                <div class="message__name">Sergei</div>
+                <div class="message__date">15:23 12.12.2022</div>
+              </div>
+              <div class="message__content">
+                <span class="coords">Координаты: [55.55555, 77.77777]</span><a class="coords-btn"
+                  href="http://www.google.com" target="_blank"></a>
+              </div>
+            </div>
+          </li>
+        </ul>
+        <div class="messages__footer">
+          <div class="footer__controls">
+            <div class="footer-controls__emojy-clip">
+              <div class="btn-wrap">
+                <button class="button inform"></button>
+              </div>
+              <div class="btn-wrap lock">
+                <button class="button mail_lock"></button>
+              </div>
+              <div class="btn-wrap">
+                <button class="button clip"></button>
+              </div>
+              <div class="btn-wrap">
+                <button class="button smile"></button>
+              </div>
+            </div>
+            <div class="footer-controls__input" contenteditable="true" data-placeholder="Введите сообщение"></div>
+            <div class="footer-controls__send-btn d_none">
+              <div class="btn-wrap">
+                <button class="button send"></button>
+              </div>
+            </div>
+            <div class="footer-controls__media">
+              <div class="btn-wrap">
+                <button class="button micro"></button>
+              </div>
+              <div class="btn-wrap">
+                <button class="button video"></button>
+              </div>
+              <div class="btn-wrap">
+                <button class="button geo"></button>
+              </div>
+            </div>
+            <div class="footer-controls__media record d_none">
+              <div class="btn-wrap">
+                <button class="button confirm"></button>
+              </div>
+              <span class="record-timer">00:00</span>
+              <div class="btn-wrap">
+                <button class="button close"></button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="messages__preview-file preview d_none">
+          <div class="preview__body">
+            <div class="preview__image"></div>
+            <input class="preview__input" type="text" placeholder="Подпись">
+            <div class="preview__buttons">
+              <button class="preview__btn add">Добавить</button>
+              <button class="preview__btn cancel">Отмена</button>
+              <button class="preview__btn send">Отправить</button>
+            </div>
+          </div>
+        </div>
+        <div class="messages__preview-file preview d_none">
+          <div class="preview__body">
+            <div class="preview__image">
+              <div class="preview__loading"></div>
+            </div>
+            <input class="preview__input" type="text" placeholder="Подпись">
+            <div class="preview__buttons">
+
+              <button class="preview__btn cancel">Отмена</button>
+              <button class="preview__btn send">Отправить</button>
+            </div>
+          </div>
+        </div>
+        <video src="" class="messages__preview-record d_none" muted></video>
+        <ul class="messages__emoji d_none">
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+          <li class="messages-emoji__item">😀</li>
+        </ul>
+        <div class="messages__encrypt-form d_none">
+          <div class="messages-encrypt-form__body">
+            <form action="" class="messages-encrypt-form__form">
+              <div class="messages-encrypt-form__text">Придумайте пароль для расшифровки сообщений</div>
+              <input type="text" class="messages-encrypt-form__input" placeholder="Введите пароль..." required>
+              <button class="messages-encrypt-form__button">Сохранить</button>
+            </form>
+            <form action="" class="messages-decrypt-form__form d_none">
+              <div class="messages-decrypt-form__text">Введите пароль для расшифровки сообщения</div>
+              <input type="text" class="messages-decrypt-form__input" placeholder="Введите пароль..." required>
+              <button class="messages-decrypt-form__button">Сохранить</button>
+            </form>
+            <button class="messages-encrypt-form__btn-close"></button>
+          </div>
+        </div>
+
+        <li class="message right" data-id="f1882727-40af-430f-bad2-b827ce48491a">
+          <div class="message__body">
+            <div class="message__header">
+              <div class="message__name">demo</div>
+              <div class="message__date">20:58 24.01.2022</div>
+            </div>
+            
+            <div class="message__content lock">U2FsdGVkX19ofCfVDfcPgNqxslQgf3BBuCLUjxPIPwE=</div>
+            <div class="btn-wrap lock checked" data-encrypt="1">
+            <button class="button mail_lock"></button>
+          </div>
+          </div>
+        </li>
+
+      </div>
+      <div class="app__sidebar search-mes d_none">
+        <div class="sidebar__header column_header">
+          <div class="btn-wrap">
+            <button class="button close-sb"></button>
+          </div>
+          <div class="sidebar-header__title">Поиск сообщений</div>
+        </div>
+        <form class="sidebar__search search" action="">
+          <label class="search__items">
+            <button class="search__button_on"></button>
+            <button class="search__button_of d_none"></button>
+            <input type="text" class="search__input" placeholder="Поиск...">
+          </label>
+        </form>
+        <ul class="sidebar__found-list">
+          <li class="found-list__found">
+            <div class="found__title">
+              <div class="found__text">Чингиз</div>
+              <div class="found__time">12:47</div>
+            </div>
+            <div class="found__content">
+              Здесь помещается 46 симоволов
+            </div>
+          </li>
+          <li class="found-list__found">
+            <div class="found__title">
+              <div class="found__text">Чингиз</div>
+              <div class="found__time">12:47</div>
+            </div>
+            <div class="found__content">
+              Здесь помещается 46 симоволов
+            </div>
+          </li>
+          <li class="found-list__found">
+            <div class="found__title">
+              <div class="found__text">Чингиз</div>
+              <div class="found__time">12:47</div>
+            </div>
+            <div class="found__content">
+              Здесь помещается 46 симоволов
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="app__sidebar info d_none">
+        <div class="sidebar__header column_header">
+          <div class="btn-wrap">
+            <button class="button close-sb"></button>
+          </div>
+          <div class="sidebar-header__title">Информация о чате</div>
+        </div>
+        <ul class="sidebar__attachments-list">
+          <li class="attachment" data-name="photo">
+            <div class="attachment__item">
+              <div class="attachment__icon photo"></div>
+              <div class="attachment__text">Фото :</div>
+            </div>
+            <div class="attachment__number">2251</div>
+          </li>
+          <li class="attachment" data-name="video">
+            <div class="attachment__item">
+              <div class="attachment__icon video"></div>
+              <div class="attachment__text">Видео :</div>
+            </div>
+            <div class="attachment__number">18</div>
+          </li>
+          <li class="attachment" data-name="file">
+            <div class="attachment__item">
+              <span class="attachment__icon file"></span>
+              <span class="attachment__text">Файлов :</span>
+            </div>
+            <div class="attachment__number">45</div>
+          </li>
+          <li class="attachment" data-name="audio">
+            <div class="attachment__item">
+              <span class="attachment__icon audio"></span>
+              <span class="attachment__text">Аудиофайлов :</span>
+            </div>
+            <div class="attachment__number">89</div>
+          </li>
+          <li class="attachment" data-name="link">
+            <div class="attachment__item">
+              <span class="attachment__icon link"></span>
+              <span class="attachment__text">Ссылок :</span>
+            </div>
+            <div class="attachment__number">34</div>
+          </li>
+          <li class="attachment" data-name="voice">
+            <div class="attachment__item">
+              <span class="attachment__icon voice"></span>
+              <span class="attachment__text">Голосовых сообщений :</span>
+            </div>
+            <div class="attachment__number">3890</div>
+          </li>
+          <li class="attachment" data-name="gif">
+            <div class="attachment__item">
+              <span class="attachment__icon gif"></span>
+              <span class="attachment__text">GIF :</span>
+            </div>
+            <div class="attachment__number">103</div>
+          </li>
+        </ul>
+        <div class="sidebar__preview d_none" data-name="preview-menu">
+          <div class="sidebar-preview__header">
+            <div class="btn-wrap">
+              <button class="button back"></button>
+            </div>
+            <div class="sidebar-preview__title">Фотографии</div>
+          </div>
+          <ul class="sidebar-preview__photo d_none" data-id="photo">
+            <li class="photo__item"></li>
+            <li class="photo__item"></li>
+            <li class="photo__item"></li>
+            <li class="photo__item"></li>
+            <li class="photo__item"></li>
+            <li class="photo__item"></li>
+            <li class="photo__item"></li>
+            <li class="photo__item"></li>
+            <li class="photo__item"></li>
+            <li class="photo__item"></li>
+          </ul>
+          <ul class="sidebar-preview__video visually_hidden" data-id="video">
+
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="app__login-page d_none">
+      <div class="login-page__body">
+        <form class="login-page__content">
+          <label class="login-page__item">
+            <div class="login-page__text">Логин</div>
+            <input name="login" class="login-page__input" type="text">
+          </label>
+          <label class="login-page__item">
+            <div class="login-page__text">Пароль</div>
+            <input name="password" class="login-page__input" type="password">
+          </label>
+          <button class="login-page__button">Войти</button>
+        </form>
+        <div class="register-page__register">
+          <button class="register-page__link">зарегистрироваться</button>
+        </div>
+      </div>
+    </div>
+    <div class="app__register-page d_none">
+      <div class="register-page__body">
+        <div class="register-page__avatar-element">
+          <label for="avatar" class="register-page__avatar">
+            Загрузить аватар
+          </label>
+          <input id="avatar" type="file" class="register-page__file-element visually_hidden">
+        </div>
+        <form class="register-page__content">
+          <label class="register-page__item">
+            <div class="register-page__text">Логин</div>
+            <input name="login" class="login-page__input" type="text">
+          </label>
+          <label class="register-page__item">
+            <div class="register-page__text">Пароль</div>
+            <input name="password" class="login-page__input" type="password">
+          </label>
+          <button class="register-page__button">Зарегистрироваться</button>
+        </form>
+      </div>
+    </div>
+    <div class="app__popup d_none">
+      <div class="app-popup__body">
+        <div class="app-popup__content">
+          <div class="app-popup__text">
+            Данный логин уже занят...
+          </div>
+          <button class="app-popup__button">ЗАКРЫТЬ</button>
+        </div>
+      </div>
+    </div> -->
+  </div>
+</body>
+
+</html>

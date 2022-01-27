@@ -1,0 +1,61 @@
+.app__register-page {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: $graphite_dark;
+}
+.register-page__body {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: $graphite_light;
+}
+.register-page__avatar {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  line-height: 1.7;
+  width: 8em;
+  height: 8em;
+  border: 1px solid $graphite_light;
+  border-radius: 50%;
+  cursor: pointer;
+  background-image: url('../images/avatar.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: $graphite_dark;
+}
+.register-page__content {
+  margin-top: 3em;
+  width: 20em;
+}
+.register-page__item {
+  display: block;
+  border-bottom: 2px solid $graphite_light;
+  &:nth-child(n+2) {
+    margin-top: 3em;
+  }
+}
+.login-page__input {
+  width: 100%;
+  padding: .5em 0 .2em;
+  font-size: 1.2rem;
+  background-color: inherit;
+  color: #fff;
+}
+.register-page__button {
+  display: block;
+  margin-top: 3em;
+  width: 100%;
+  background-color: inherit;
+  color: inherit;
+  font-size: 1.2rem;
+  border: 2px solid $graphite_light;
+  padding: .5em 0;
+  border-radius: 5px;
+}

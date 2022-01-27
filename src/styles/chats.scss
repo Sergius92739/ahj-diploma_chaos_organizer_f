@@ -1,0 +1,156 @@
+.app__chats {
+  width: 25%;
+  color: #fff;
+  background-color: $graphite_dark;
+}
+
+.chats__header {
+  border-bottom: 1px solid $gray_text;
+
+  .chat-header__user {
+    display: flex;
+    align-items: center;
+  }
+  .chats-header__avatar {
+    width: 2.5em;
+    height: 2.5em;
+    border-radius: 50%;
+    // background-image: url("../images/1607460922343.jpg");
+    background-image: url('../images/avatar.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  .chat-header__name {
+    margin-left: 1em;
+  }
+  .button.logout {
+    background-image: url("../images/logout-box-r-white.svg");
+  }
+}
+
+.search {
+  padding: 0.5em 1em;
+  border-bottom: 1px solid $gray_text;
+  &__items {
+    display: flex;
+    align-items: center;
+    border-radius: 0.5em;
+    background-color: $graphite_regular;
+    padding: 0.5em 1em;
+  }
+  &__button_on,
+  &__button_of {
+    display: block;
+    width: 1.3em;
+    height: 1.3em;
+    background-color: inherit;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    &.d_none {
+      display: none;
+    }
+  }
+  &__button_on {
+    background-image: url("../images/search-line.svg");
+  }
+  &__button_of {
+    background-image: url("../images/arrow-left-line.svg");
+  }
+  &__input {
+    color: inherit;
+    display: block;
+    flex: 1;
+    margin-left: 20px;
+    background-color: inherit;
+    &::placeholder {
+      color: $gray_text;
+    }
+    @include placeholder {
+      color: $gray_text;
+    }
+  }
+}
+
+.chats__list {
+  height: 68vh;
+  overflow: auto;
+}
+.general__chat.chat {
+  border-bottom: 1px solid $gray_text;
+  .chat__content {
+    border: none;
+  }
+}
+
+.chat {
+  padding: 1em 1em 0;
+  display: flex;
+  cursor: pointer;
+  &:hover {
+    background-color: $graphite_regular;
+  }
+  &.active {
+    border-left: 10px solid $gray_text;
+    background-color: $primary-color1;
+  }
+  &__avatar {
+    width: 3em;
+    height: 3em;
+    border-radius: 50%;
+    background-image: url("../images/avatar.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    &.online::after {
+      position: absolute;
+      content: '';
+      width: 15px;
+      height: 15px;
+      top: 35px;
+      left: 35px;
+      border-radius: 50%;
+      background-color: $success-color;
+    }
+  }
+  &__content {
+    flex: 1;
+    margin-left: 1em;
+    padding-bottom: 0.9em;
+    border-bottom: 1px solid $gray_text;
+    .chat-content__header {
+      margin-top: 0.4em;
+      display: flex;
+      justify-content: space-between;
+      .chat-content__time {
+        font-size: 0.8rem;
+        margin-right: 1em;
+        margin-top: 3px;
+      }
+    }
+    .chat-content__preview {
+      margin-top: 0.4em;
+      font-size: 0.8rem;
+      .preview__checkbox {
+        display: inline-block;
+        width: 1.8em;
+        height: 1.8em;
+        margin-bottom: -5px;
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
+        &.unread {
+          background-image: url("../images/check-double-line_gray.svg");
+        }
+        &.viewed {
+          background-image: url("../images/check-double-line_green.svg");
+        }
+      }
+      .preview__text {
+        color: $gray_text;
+      }
+    }
+  }
+}

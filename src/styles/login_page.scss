@@ -1,0 +1,59 @@
+.app__login-page {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: $graphite_dark;
+}
+.login-page__body {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: $graphite_light;
+}
+
+.login-page__content {
+  margin-top: 3em;
+  width: 20em;
+}
+.login-page__item {
+  display: block;
+  border-bottom: 2px solid $graphite_light;
+  &:nth-child(n+2) {
+    margin-top: 3em;
+  }
+}
+.login-page__input {
+  width: 100%;
+  padding: .5em 0 .2em;
+  font-size: 1.2rem;
+  background-color: inherit;
+  color: #fff;
+}
+.login-page__button {
+  display: block;
+  margin-top: 3em;
+  width: 100%;
+  background-color: inherit;
+  color: inherit;
+  font-size: 1.2rem;
+  border: 2px solid $graphite_light;
+  padding: .5em 0;
+  border-radius: 5px;
+}
+
+.register-page__register {
+  margin-top: 3em;
+  color: $graphite_light;
+  .register-page__link {
+    display: block;
+    margin: 0 auto;
+    border-bottom: 1px solid $graphite_light;
+    color: inherit;
+    background-color: inherit;
+    font-size: 1.1rem;
+  }
+}
