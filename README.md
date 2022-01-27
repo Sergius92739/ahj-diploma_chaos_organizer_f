@@ -1,3 +1,5 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/6tv4vvw98qlvkyq3/branch/master?svg=true)](https://ci.appveyor.com/project/Sergius92739/ahj-diploma-chaos-organizer-f/branch/master)
+
 #### Deployment:  <a href="">Github Pages</a>
 
 #### Frontend:  <a href="">Repository</a>
