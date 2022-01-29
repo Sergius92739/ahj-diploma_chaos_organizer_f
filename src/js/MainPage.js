@@ -46,6 +46,7 @@ export default class MainPage {
     this.decryption = false;
     this.encryptPassword = null;
     this.decryptPassword = null;
+    this.weatherKey = 'eca3c39a199c6467336e7a5e2a1db49e'
 
     this.onWsMessage = this.onWsMessage.bind(this);
     this.onSendBtnClick = this.onSendBtnClick.bind(this);
@@ -73,7 +74,7 @@ export default class MainPage {
     this.onDecryptFormSubmit = this.onDecryptFormSubmit.bind(this);
   }
 
-  init(data) {
+ async init(data) {
     this.userID = data.user.id;
     this.container.insertAdjacentHTML('afterbegin', MainPage.startMarkUp);
     this.appContent = this.container.querySelector('.app__content');
@@ -121,6 +122,9 @@ export default class MainPage {
     this.mesEncryptFormInput = this.container.querySelector('.messages-encrypt-form__input');
     this.mesDecryptFormInput = this.container.querySelector('.messages-decrypt-form__input');
     this.mesFormButtonClose = this.container.querySelector('.messages-encrypt-form__btn-close');
+    this.infoBtn = this.container.querySelector('.button.inform').closest('.btn-wrap');
+    this.infoTooltip = this.container.querySelector('.messages__info');
+    this.infoTooltipBtn = this.container.querySelector('.messages-info__button')
 
     this.asignEventHandlers();
     this.onSocketConnect();
@@ -146,6 +150,8 @@ export default class MainPage {
     this.mesDecryptForm.addEventListener('submit', this.onDecryptFormSubmit);
     this.mesFormButtonClose.addEventListener('click', this.onMesFormBtnCloseClick);
     this.messagesContent.addEventListener('click', this.onMessagesContentClick);
+    this.infoBtn.addEventListener('click', () => this.infoTooltip.classList.remove('d_none'))
+    this.infoTooltipBtn.addEventListener('click', () => this.infoTooltip.classList.add('d_none'))
   }
 
   showEncryptForm() {
@@ -250,13 +256,13 @@ export default class MainPage {
         } else {
           contentEl = await this.targetMesEl.closest('.message__body').querySelector('.message__content')
         }
-        const originalText = this.decryptMessage(contentEl.textContent, result.data);
+        const originalText = await this.decryptMessage(contentEl.textContent, result.data);
         contentEl.innerHTML = originalText;
         if (text.textContent) {
-          const textInfo = this.decryptMessage(text.textContent, result.data)
+          const textInfo = await this.decryptMessage(text.textContent, result.data)
           text.textContent = textInfo;
         }
-        
+
         this.mesDecryptFormInput.value = '';
       } else {
         this.showPopup('Неверный пароль!')
@@ -324,6 +330,54 @@ export default class MainPage {
         this.previewRecord.classList.add('d_none');
       }
     }
+  }
+
+  async getWeather() {
+    const location = await this.geolocation.getLocation(this.showPopup);
+    const request = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&lang=ru&appid=${this.weatherKey}`);
+    const response = await request.json();
+    return response;
+  }
+
+  static weatherMarkup(data) {
+    return `<div class="weather">
+    <ul class="weather__header">
+      <li class="weather__city">${data.name}</li>
+      <li class="weather__preview">
+        <div class="weather__icon" data-weather="icon">
+          <img src="https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png" alt="${data.weather[0].description}">
+        </div>
+        <div class="weather__temp" data-weather="temp">${Math.round(+data.main.temp - 273)}&deg;</div>
+      </li>
+      <li class="weather__description" data-weather="description">${data.weather[0].description}</li>
+    </ul>
+    <ul class="weather__more">
+      <li class="weather-more__item">
+        <div class="weather-more__text">Ощущается:</div>
+        <div class="weather-more__num" data-weather="wind">${Math.round(+data.main.feels_like - 273)}&deg;</div>
+      </li>
+      <li class="weather-more__item">
+        <div class="weather-more__text">Облачность:</div>
+        <div class="weather-more__num" data-weather="wind">${data.clouds.all} &#37;</div>
+      </li>
+      <li class="weather-more__item">
+        <div class="weather-more__text">Влажность:</div>
+        <div class="weather-more__num" data-weather="humidity">${data.main.humidity} &#37;</div>
+      </li>
+      <li class="weather-more__item">
+        <div class="weather-more__text">Давление:</div>
+        <div class="weather-more__num" data-weather="pressure">${data.main.pressure} мм рт. ст.</div>
+      </li>
+      <li class="weather-more__item">
+        <div class="weather-more__text">Скорость ветра:</div>
+        <div class="weather-more__num" data-weather="wind">${data.wind.speed} м/с</div>
+      </li>
+      <li class="weather-more__item">
+        <div class="weather-more__text">Видимость:</div>
+        <div class="weather-more__num" data-weather="wind">${(data.visibility / 1000).toFixed(1)} км</div>
+      </li>
+    </ul>
+  </div>`
   }
 
   async onMediaBtnsClick(evt) {
@@ -583,7 +637,7 @@ export default class MainPage {
     }
   }
 
-  onMaininputKeydown(evt) {
+ async onMaininputKeydown(evt) {
     if (evt.code === 'Enter') {
       evt.preventDefault();
       let content;
@@ -594,6 +648,10 @@ export default class MainPage {
       } else {
         content = this.mainInput.textContent;
         encryption = false;
+      }
+      if (this.mainInput.textContent.trim() === '@chaos: погода') {
+        const weather = await this.getWeather();
+        content = weather;
       }
       const data = {
         type: 'text_message',
@@ -616,16 +674,22 @@ export default class MainPage {
     }
   }
 
-  onSendBtnClick(evt) {
+  async onSendBtnClick(evt) {
     if (evt.target.closest('.btn-wrap')) {
       let content;
       let encryption;
+      
       if (this.encryption) {
         content = this.encryptMessage(this.mainInput.textContent, this.encryptPassword)
         encryption = true;
       } else {
         content = this.mainInput.textContent;
         encryption = false;
+      }
+      if (this.mainInput.textContent.trim() === '@chaos: погода') {
+        const weather = await this.getWeather();
+        console.log('weather:', weather)
+        content = weather;
       }
       const data = {
         type: 'text_message',
@@ -910,6 +974,15 @@ export default class MainPage {
         <button class="messages-encrypt-form__btn-close"></button>
       </div>
     </div>
+    <div class="messages__info d_none">
+      <div class="messages-info__body">
+        <div class="messages-info__title">Список доступных команд:</div>
+        <ul class="messages-info__list">
+          <li class="messages-info__item"><span class="info__command">@chaos: погода</span><span class="info__text">запрос погоды</span></li>
+        </ul>
+        <button class="messages-info__button">ЗАКРЫТЬ</button>
+      </div>
+    </div>
   </div>`;
   }
 
@@ -920,6 +993,11 @@ export default class MainPage {
   messageMarkup(className, message, time, userName, mesID, fileObj = '', encryption, password) {
     let lockClassName;
     let button;
+    let filePreview;
+    let fileTemplate;
+    let weatherClassname = className;
+    let weatherUserName = userName;
+
     if (encryption) {
       lockClassName = 'lock';
       button = `<div class="btn-wrap lock checked"">
@@ -935,11 +1013,16 @@ export default class MainPage {
     }
 
     if (typeof message === 'object') {
-      content = `<span class="coords">Координаты: [${message.latitude}, ${message.longitude}]</span><a class="coords-btn" href="http://www.google.com/maps/place/${message.latitude},${message.longitude}" target="_blank"></a>`
+      if (message.latitude && message.longitude) {
+        content = `<span class="coords">Координаты: [${message.latitude}, ${message.longitude}]</span><a class="coords-btn" href="http://www.google.com/maps/place/${message.latitude},${message.longitude}" target="_blank"></a>`
+      }
+      if (message.weather) {
+        weatherClassname = 'left';
+        weatherUserName = 'chaos';
+        content = MainPage.weatherMarkup(message);
+      }
     }
 
-    let filePreview;
-    let fileTemplate;
     if (fileObj) {
       if (fileObj && !encryption) {
         if (fileObj.type.startsWith('audio') && fileObj.type !== 'audio/webm;codecs=opus') {
@@ -991,10 +1074,10 @@ export default class MainPage {
       filePreview = '';
     }
 
-    return `<li class="message ${className}" data-id="${mesID}">
+    return `<li class="message ${weatherClassname}" data-id="${mesID}">
     <div class="message__body">
       <div class="message__header">
-        <div class="message__name">${userName}</div>
+        <div class="message__name">${weatherUserName}</div>
         <div class="message__date">${time}</div>
       </div>
       ${filePreview}

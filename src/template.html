@@ -12,7 +12,7 @@
 
 <body>
   <div class="app">
-    <!-- <h1 class="app__title">Chaos Organizer</h1>
+    <h1 class="app__title">Chaos Organizer</h1>
     <div class="app__content">
       <div class="app__chats">
         <div class="chats__header column_header">
@@ -273,7 +273,36 @@
                 <div class="message__date">15:23 12.12.2022</div>
               </div>
               <div class="message__content">
-                Lorem.
+                <div class="weather">
+                  <ul class="weather__header">
+                    <li class="weather__city">Vnukovo</li>
+                    <li class="weather__preview">
+                      <div class="weather__icon" data-weather="icon">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/b/bf/Circle-icons-weather.svg" alt="">
+                      </div>
+                      <div class="weather__temp" data-weather="temp">-4&deg;</div>
+                    </li>
+                    <li class="weather__description" data-weather="description">Небольшой снег</li>
+                  </ul>
+                  <ul class="weather__more">
+                    <li class="weather-more__item">
+                      <div class="weather-more__text">Ощущается:</div>
+                      <div class="weather-more__num" data-weather="wind">-7&deg;</div>
+                    </li>
+                    <li class="weather-more__item">
+                      <div class="weather-more__text">Влажность:</div>
+                      <div class="weather-more__num" data-weather="humidity">100 &#37;</div>
+                    </li>
+                    <li class="weather-more__item">
+                      <div class="weather-more__text">Давление:</div>
+                      <div class="weather-more__num" data-weather="pressure">744 мм рт. ст.</div>
+                    </li>
+                    <li class="weather-more__item">
+                      <div class="weather-more__text">Скорость ветра:</div>
+                      <div class="weather-more__num" data-weather="wind">4 м/с</div>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
           </li>
@@ -603,20 +632,19 @@
           </div>
         </div>
 
-        <li class="message right" data-id="f1882727-40af-430f-bad2-b827ce48491a">
-          <div class="message__body">
-            <div class="message__header">
-              <div class="message__name">demo</div>
-              <div class="message__date">20:58 24.01.2022</div>
-            </div>
-            
-            <div class="message__content lock">U2FsdGVkX19ofCfVDfcPgNqxslQgf3BBuCLUjxPIPwE=</div>
-            <div class="btn-wrap lock checked" data-encrypt="1">
-            <button class="button mail_lock"></button>
+        <div class="messages__info d_none">
+          <div class="messages-info__body">
+            <div class="messages-info__title">Список доступных команд:</div>
+            <ul class="messages-info__list">
+              <li class="messages-info__item"><span class="info__command">@chaos: погода</span><span class="info__text">запрос погоды</span></li>
+              <li class="messages-info__item"><span class="info__command">@chaos: курсы валют</span><span class="info__text">запрос курсов валют</span></li>
+              <li class="messages-info__item"><span class="info__command">@chaos: погода</span><span class="info__text">запрос погоды</span></li>
+              <li class="messages-info__item"><span class="info__command">@chaos: погода</span><span class="info__text">запрос погоды</span></li>
+              <li class="messages-info__item"><span class="info__command">@chaos: погода</span><span class="info__text">запрос погоды</span></li>
+            </ul>
+            <button class="messages-info__button">ЗАКРЫТЬ</button>
           </div>
-          </div>
-        </li>
-
+        </div>
       </div>
       <div class="app__sidebar search-mes d_none">
         <div class="sidebar__header column_header">
@@ -793,8 +821,146 @@
           <button class="app-popup__button">ЗАКРЫТЬ</button>
         </div>
       </div>
-    </div> -->
+    </div>
   </div>
+  <!-- <script>
+    const search = document.querySelectorAll('.search');
+    const searchBtnOn = document.querySelectorAll('.search__button_on');
+    const searchBtnOf = document.querySelectorAll('.search__button_of');
+    const searchInput = document.querySelectorAll('.search__input');
+    const mainInput = document.querySelector('.footer-controls__input');
+    const sendBtnBox = document.querySelector('.footer-controls__send-btn');
+    const mediaBox = document.querySelector('.footer-controls__media');
+    const chatList = document.querySelector('.chats__list');
+    const general = document.querySelector('.general__chat.chat');
+    const mesHeaderBtns = document.querySelector('.messages-header__buttons');
+    const sideBarSearch = document.querySelector('.app__sidebar.search-mes');
+    const sideBarInfo = document.querySelector('.app__sidebar.info');
+    const foundList = document.querySelector('.sidebar__found-list');
+    const sidebarBtnClose = document.querySelectorAll('.button.close-sb');
+    const attachmentMenu = document.querySelector('.sidebar__attachments-list');
+    const previewMenu = document.querySelector('[data-name="preview-menu"]');
+    const backBtn = document.querySelector('.button.back')
+
+    attachmentMenu.addEventListener('click', (evt) => {
+      if (evt.target.closest('[data-name="photo"]')) {
+        const name = evt.target.closest('[data-name="photo"]')
+        previewMenu.classList.remove('d_none');
+        attachmentMenu.classList.add('d_none');
+        document.querySelector(`[data-id="${name}"]`).classList.remove('d_none');
+      }
+    });
+    backBtn.addEventListener('click', (evt) => {
+      const previewList = evt.target
+        .closest('.sidebar-preview__header').nextElementSibling;
+      previewList.classList.add('d_none');
+      previewMenu.classList.add('d_none');
+      attachmentMenu.classList.remove('d_none');
+    })
+    sidebarBtnClose.forEach((elem) => {
+      elem.addEventListener('click', (evt) => {
+        // mesHeaderBtns.classList.remove('d_none');
+        evt.target.closest('.app__sidebar').classList.add('d_none');
+        // sideBar.classList.add('d_none');
+        mainInput.classList.remove('sb-active');
+      })
+    })
+    foundList.addEventListener('click', (evt) => {
+      const target = evt.target.closest('.found-list__found')
+      document.querySelectorAll('.found-list__found').forEach((elem) => {
+        elem.classList.remove('checked');
+      })
+      if (target) {
+        target.classList.add('checked')
+      }
+    })
+    search.forEach((elem) => elem.addEventListener('submit', (evt) => evt.preventDefault()))
+
+    mesHeaderBtns.addEventListener('click', (evt) => {
+      if (evt.target.className === 'button find') {
+        mainInput.classList.add('sb-active');
+        // mesHeaderBtns.classList.add('d_none');
+        sideBarSearch.classList.toggle('d_none');
+        if (!sideBarInfo.classList.contains('d_none')) {
+          sideBarInfo.classList.toggle('d_none')
+        }
+      }
+      if (evt.target.className === 'button menu') {
+        mainInput.classList.add('sb-active');
+        // mesHeaderBtns.classList.add('d_none');
+        sideBarInfo.classList.toggle('d_none');
+        if (!sideBarSearch.classList.contains('d_none')) {
+          sideBarSearch.classList.toggle('d_none')
+        }
+      }
+    })
+
+    general.addEventListener('click', (evt) => {
+      if (evt.target.closest('.general__chat.chat')) {
+        document.querySelectorAll('.chats__chat.chat')
+          .forEach((elem) => elem.classList.remove('active'));
+        evt.target.closest('.general__chat.chat').classList.toggle('active')
+      }
+    })
+    chatList.addEventListener('click', (evt) => {
+      if (evt.target.closest('.chats__chat.chat')) {
+        document.querySelectorAll('.chats__chat.chat')
+          .forEach((elem) => elem.classList.remove('active'));
+        general.className = 'general__chat chat'
+        evt.target.closest('.chats__chat.chat').classList.toggle('active')
+      }
+    })
+    const observer = new MutationObserver(() => {
+      sendBtnBox.classList.toggle('d_none');
+      mediaBox.classList.toggle('d_none');
+    });
+
+    observer.observe(mainInput, {
+      childList: true,
+    })
+
+    mainInput.addEventListener('keydown', (evt) => {
+      if (evt.code === 'Enter') {
+        evt.preventDefault();
+        evt.target.innerText = '';
+      }
+    });
+
+    searchBtnOn.forEach((elem) => {
+      elem.addEventListener('click', (evt) => {
+        searchInput.forEach((item) => item.focus())
+        searchBtnOn.forEach((e) => e.classList.add('d_none'))
+        searchBtnOf.forEach((el) => el.classList.remove('d_none'))
+      });
+    })
+
+    searchBtnOf.forEach((elem) => {
+      elem.addEventListener('click', (evt) => {
+        searchInput.forEach((el) => el.blur());
+        searchBtnOf.forEach((e) => e.classList.add('d_none'));
+        searchBtnOn.forEach((item) => item.classList.remove('d_none'))
+        searchInput.value = '';
+      });
+    })
+
+    searchInput.forEach((elem) => {
+      elem.addEventListener('focus', (evt) => {
+        evt.target.closest('.search__items')
+          .querySelector('.search__button_on').className = 'search__button_on d_none';
+        evt.target.closest('.search__items')
+          .querySelector('.search__button_of').className = 'search__button_of';
+      });
+    })
+
+    document.addEventListener('click', (evt) => {
+      if (!evt.target.closest('.search__items')) {
+        searchBtnOn.forEach((elem) => elem.className = 'search__button_on');
+        searchBtnOf.forEach((item) => item.className = 'search__button_of d_none');
+        searchInput.forEach((el) => el.value = '');
+      }
+    })
+
+  </script> -->
 </body>
 
 </html>

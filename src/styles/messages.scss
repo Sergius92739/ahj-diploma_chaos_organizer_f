@@ -7,6 +7,59 @@
   background-size: cover;
   position: relative;
   opacity: 0.9;
+  .messages__info {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &.d_none {
+      display: none;
+    }
+    .messages-info__body {
+      color: #000;
+      background-color: #fff;
+      padding: 2em;
+      border-radius: 0.5em;
+      .messages-info__button {
+        display: block;
+        margin: 0 auto;
+        margin-top: 2em;
+        font-size: 1.2rem;
+        background-color: inherit;
+        padding: 0.7em 4em;
+        border: 2px solid #000;
+        border-radius: 5px;
+        font-weight: 600;
+      }
+    }
+    .messages-info__title {
+      font-size: 1.5rem;
+    }
+    .messages-info__list {
+      margin-top: 1.5em;
+      font-size: 1.2rem;
+      .messages-info__item {
+        display: flex;
+        justify-content: space-between;
+        &:nth-child(n + 2) {
+          margin-top: 1em;
+        }
+        .info__command {
+          color: $primary-color;
+        }
+        .info__text {
+          display: inline-block;
+          width: 14em;
+          margin-left: 4em;
+        }
+      }
+    }
+  }
+
   .messages__encrypt-form {
     position: absolute;
     width: 100%;
@@ -212,6 +265,48 @@
   }
   .message {
     line-height: 1.3;
+    .weather {
+      padding: 1em;
+      border-radius: 0.5em;
+      background-color: $primary-color1;
+      &__header {
+        text-align: center;
+      }
+      &__city {
+        font-size: 1.7rem;
+      }
+      &__preview {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      &__icon {
+        margin-top: 1em;
+        & img {
+          width: 6em;
+          height: 6em;
+        }
+      }
+      &__temp {
+        font-size: 5rem;
+        margin-left: 0.2em;
+        margin-bottom: -0.25em;
+      }
+      &__more {
+        margin-top: 1em;
+        .weather-more__item {
+          display: flex;
+          justify-content: space-between;
+          &:nth-child(n + 2) {
+            margin-top: 0.5em;
+          }
+          .weather-more__num {
+            width: 7.5em;
+            margin-left: 2em;
+          }
+        }
+      }
+    }
     .encryptedFile {
       text-align: left;
       .ecryptedTitle {
