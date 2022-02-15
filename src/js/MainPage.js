@@ -13,7 +13,7 @@ export default class MainPage {
     this.container = element;
     this.baseURL = baseURL;
     this.ws = null;
-    this.wsURL = 'ws://ahj-chaos-organizer-sergius.herokuapp.com'
+    this.wsURL = 'wss://ahj-chaos-organizer-sergius.herokuapp.com'
     this.appContent = null;
     this.userID = null;
     this.groupList = null;
