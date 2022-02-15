@@ -75,6 +75,7 @@ export default class LoginPage {
       this.mainPage.init(result.data);
       this.mainPage.btnLogout.addEventListener('click', this.onLogoutBtnClick);
     } else {
+      this.loadingPage.classList.add('d_none');
       this.showPopup('Неверный логин или пароль')
     }
   }
