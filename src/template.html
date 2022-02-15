@@ -306,14 +306,59 @@
               </div>
             </div>
           </li>
-          <li class="message right">
-            <div class="message__body">
+          <li class="message left">
+            <div id="chaos" class="message__body">
               <div class="message__header">
                 <div class="message__name">Sergei</div>
                 <div class="message__date">15:23 12.12.2022</div>
               </div>
               <div class="message__content">
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Libero, autem.
+                <div class="exchange">
+                  <div class="exchange__title">Курсы валют</div>
+                  <ul class="exchange__list">
+                    <li class="exchange-list__item">
+                      <div class="exchange-item__text">USD (Доллар США)</div>
+                      <div class="exchange-item__num">75.429</div>
+                    </li>
+                    <li class="exchange-list__item">
+                      <div class="exchange-item__text">EUR (Евро)</div>
+                      <div class="exchange-item__num">84.631</div>
+                    </li>
+                    <li class="exchange-list__item">
+                      <div class="exchange-item__text">GBP (Фунт стерлингов Соединенного королевства)</div>
+                      <div class="exchange-item__num">102.198</div>
+                    </li>
+                    <li class="exchange-list__item">
+                      <div class="exchange-item__text">CHF (Швейцарский франк)</div>
+                      <div class="exchange-item__num">81.571</div>
+                    </li>
+                    <li class="exchange-list__item">
+                      <div class="exchange-item__text">PLN (Польский злотый)</div>
+                      <div class="exchange-item__num">18.400</div>
+                    </li>
+                    <li class="exchange-list__item">
+                      <div class="exchange-item__text">JPY (Японских иен)</div>
+                      <div class="exchange-item__num">0.626</div>
+                    </li>
+                    <li class="exchange-list__item">
+                      <div class="exchange-item__text">UAH (Украинских гривен)</div>
+                      <div class="exchange-item__num">26.9859</div>
+                    </li>
+                    <li class="exchange-list__item">
+                      <div class="exchange-item__text">MDL (Молдавских леев)</div>
+                      <div class="exchange-item__num">43.3523</div>
+                    </li>
+                    <li class="exchange-list__item">
+                      <div class="exchange-item__text">BYN (Белорусский рубль)</div>
+                      <div class="exchange-item__num">29.7774</div>
+                    </li>
+                    <li class="exchange-list__item">
+                      <div class="exchange-item__text">KZT (Казахстанских тенге)</div>
+                      <div class="exchange-item__num">17.8808</div>
+                    </li>
+                  </ul>
+                  <a class="api__link" href="https://www.cbr-xml-daily.ru/" target="_blank">Курсы валют, API</a>
+                </div>
               </div>
             </div>
           </li>
@@ -636,11 +681,16 @@
           <div class="messages-info__body">
             <div class="messages-info__title">Список доступных команд:</div>
             <ul class="messages-info__list">
-              <li class="messages-info__item"><span class="info__command">@chaos: погода</span><span class="info__text">запрос погоды</span></li>
-              <li class="messages-info__item"><span class="info__command">@chaos: курсы валют</span><span class="info__text">запрос курсов валют</span></li>
-              <li class="messages-info__item"><span class="info__command">@chaos: погода</span><span class="info__text">запрос погоды</span></li>
-              <li class="messages-info__item"><span class="info__command">@chaos: погода</span><span class="info__text">запрос погоды</span></li>
-              <li class="messages-info__item"><span class="info__command">@chaos: погода</span><span class="info__text">запрос погоды</span></li>
+              <li class="messages-info__item"><span class="info__command">@chaos: погода</span><span
+                  class="info__text">запрос погоды</span></li>
+              <li class="messages-info__item"><span class="info__command">@chaos: курсы валют</span><span
+                  class="info__text">запрос курсов валют</span></li>
+              <li class="messages-info__item"><span class="info__command">@chaos: погода</span><span
+                  class="info__text">запрос погоды</span></li>
+              <li class="messages-info__item"><span class="info__command">@chaos: погода</span><span
+                  class="info__text">запрос погоды</span></li>
+              <li class="messages-info__item"><span class="info__command">@chaos: погода</span><span
+                  class="info__text">запрос погоды</span></li>
             </ul>
             <button class="messages-info__button">ЗАКРЫТЬ</button>
           </div>
@@ -821,6 +871,9 @@
           <button class="app-popup__button">ЗАКРЫТЬ</button>
         </div>
       </div>
+    </div>
+    <div class="app__loading-page d_none">
+      <div class="app-loading_page__content"></div>
     </div> -->
   </div>
   <!-- <script>

@@ -114,6 +114,27 @@ body {
       background-position: center;
     }
   }
-  .sidebar {
+  .app__loading-page {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &.d_none {
+      display: none;
+    }
+    .app-loading_page__content {
+      font-size: 3rem;
+      width: 3em;
+      height: 3em;
+      background-image: url("../images/load.gif");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+    }
   }
 }

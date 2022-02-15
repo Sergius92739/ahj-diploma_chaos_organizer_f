@@ -7,6 +7,9 @@
   background-size: cover;
   position: relative;
   opacity: 0.9;
+  #chaos {
+    max-width: 80%;
+  }
   .messages__info {
     position: absolute;
     width: 100%;
@@ -42,6 +45,7 @@
     .messages-info__list {
       margin-top: 1.5em;
       font-size: 1.2rem;
+      line-height: 1.3;
       .messages-info__item {
         display: flex;
         justify-content: space-between;
@@ -265,6 +269,36 @@
   }
   .message {
     line-height: 1.3;
+    .exchange {
+      padding: 1em;
+      border-radius: 0.5em;
+      background-color: $primary-color1;
+      &__title {
+        text-align: center;
+        font-size: 1.7rem;
+      }
+      &__list {
+        margin-top: 1em;
+        .exchange-list__item {
+          display: flex;
+          justify-content: space-between;
+          &:nth-child(n+2) {
+            margin-top: .5em;
+          }
+          .exchange-item__text span {
+            color: $danger-color;
+          }
+          .exchange-item__num {
+            width: 5em;
+            margin-left: 2em;
+          }
+        }
+      }
+      .api__link {
+        display: inline-block;
+        margin-top: 1em;
+      }
+    }
     .weather {
       padding: 1em;
       border-radius: 0.5em;
@@ -289,7 +323,6 @@
       }
       &__temp {
         font-size: 5rem;
-        margin-left: 0.2em;
         margin-bottom: -0.25em;
       }
       &__more {
