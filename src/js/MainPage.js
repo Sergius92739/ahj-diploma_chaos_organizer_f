@@ -13,7 +13,7 @@ export default class MainPage {
     this.container = element;
     this.baseURL = baseURL;
     this.ws = null;
-    this.wsURL = 'wss://ahj-chaos-organizer-sergius.herokuapp.com'
+    this.wsURL = 'ws://ahj-chaos-organizer-sergius.herokuapp.com'
     this.appContent = null;
     this.userID = null;
     this.groupList = null;
@@ -46,7 +46,7 @@ export default class MainPage {
     this.decryption = false;
     this.encryptPassword = null;
     this.decryptPassword = null;
-    this.weatherKey = 'eca3c39a199c6467336e7a5e2a1db49e'
+    this.weatherKey = 'eca3c39a199c6467336e7a5e2a1db49e';
 
     this.onWsMessage = this.onWsMessage.bind(this);
     this.onSendBtnClick = this.onSendBtnClick.bind(this);
@@ -256,14 +256,13 @@ export default class MainPage {
         } else {
           contentEl = await this.targetMesEl.closest('.message__body').querySelector('.message__content')
         }
+        this.mesDecryptFormInput.value = '';
         const originalText = await this.decryptMessage(contentEl.textContent, result.data);
         contentEl.innerHTML = originalText;
         if (text.textContent) {
           const textInfo = await this.decryptMessage(text.textContent, result.data)
           text.textContent = textInfo;
         }
-
-        this.mesDecryptFormInput.value = '';
       } else {
         this.showPopup('Неверный пароль!')
         this.mesDecryptFormInput.value = '';
@@ -332,10 +331,74 @@ export default class MainPage {
     }
   }
 
+  static exchangeMarkup(data) {
+    const { Valute } = data;
+    return `<div class="exchange">
+    <div class="exchange__title">Курс валют в России</div>
+    <ul class="exchange__list">
+      <li class="exchange-list__item">
+        <div class="exchange-item__text">${Valute.USD.CharCode} (${Valute.USD.Name})</div>
+        <div class="exchange-item__num">${Valute.USD.Value}</div>
+      </li>
+      <li class="exchange-list__item">
+        <div class="exchange-item__text">${Valute.EUR.CharCode} (${Valute.EUR.Name})</div>
+        <div class="exchange-item__num">${Valute.EUR.Value}</div>
+      </li>
+      <li class="exchange-list__item">
+        <div class="exchange-item__text">${Valute.GBP.CharCode} (${Valute.GBP.Name})</div>
+        <div class="exchange-item__num">${Valute.GBP.Value}</div>
+      </li>
+      <li class="exchange-list__item">
+        <div class="exchange-item__text">${Valute.CHF.CharCode} (${Valute.CHF.Name})</div>
+        <div class="exchange-item__num">${Valute.CHF.Value}</div>
+      </li>
+      <li class="exchange-list__item">
+        <div class="exchange-item__text">${Valute.PLN.CharCode} (${Valute.PLN.Name})</div>
+        <div class="exchange-item__num">${Valute.PLN.Value}</div>
+      </li>
+      <li class="exchange-list__item">
+        <div class="exchange-item__text">${Valute.JPY.CharCode} (${Valute.JPY.Name})</div>
+        <div class="exchange-item__num">${Valute.JPY.Value}</div>
+      </li>
+      <li class="exchange-list__item">
+        <div class="exchange-item__text">${Valute.UAH.CharCode} (${Valute.UAH.Name})</div>
+        <div class="exchange-item__num">${Valute.UAH.Value}</div>
+      </li>
+      <li class="exchange-list__item">
+        <div class="exchange-item__text">${Valute.MDL.CharCode} (${Valute.MDL.Name})</div>
+        <div class="exchange-item__num">${Valute.MDL.Value}</div>
+      </li>
+      <li class="exchange-list__item">
+        <div class="exchange-item__text">${Valute.BYN.CharCode} (${Valute.BYN.Name})</div>
+        <div class="exchange-item__num">${Valute.BYN.Value}</div>
+      </li>
+      <li class="exchange-list__item">
+        <div class="exchange-item__text">${Valute.KZT.CharCode} (${Valute.KZT.Name})</div>
+        <div class="exchange-item__num">${Valute.KZT.Value}</div>
+      </li>
+    </ul>
+    <a class="api__link" href="https://www.cbr-xml-daily.ru/" target="_blank">Курсы валют, API</a>
+  </div>`
+  }
+
   async getWeather() {
     const location = await this.geolocation.getLocation(this.showPopup);
     const request = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&lang=ru&appid=${this.weatherKey}`);
     const response = await request.json();
+    return response;
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  async getExchangeRates() {
+    const request = await fetch('https://www.cbr-xml-daily.ru/daily_json.js');
+    const response = await request.json();
+    return response;
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  async getFactsNumber(object) {
+    const request = await fetch(`http://numbersapi.com/${object.month}/${object.day}/date?json`);
+    const response = await request.json()
     return response;
   }
 
@@ -653,6 +716,19 @@ export default class MainPage {
         const weather = await this.getWeather();
         content = weather;
       }
+      if (this.mainInput.textContent.trim() === '@chaos: курс') {
+        const rates = await this.getExchangeRates();
+        content = rates;
+      }
+      if (/^@chaos:\s(0?[1-9]|[1-2][0-9]|3[0-1])\/(0?[1-9]|1[0-2])$/.test(this.mainInput.textContent.trim())) {
+        const date = this.mainInput.textContent.trim().split(' ')[1];
+        const object = {
+          month: date.split('/')[1],
+          day: date.split('/')[0],
+        }
+        const facts = await this.getFactsNumber(object);
+        content = facts;
+      }
       const data = {
         type: 'text_message',
         data: {
@@ -688,8 +764,20 @@ export default class MainPage {
       }
       if (this.mainInput.textContent.trim() === '@chaos: погода') {
         const weather = await this.getWeather();
-        console.log('weather:', weather)
         content = weather;
+      }
+      if (this.mainInput.textContent.trim() === '@chaos: курс') {
+        const rates = await this.getExchangeRates();
+        content = rates;
+      }
+      if (/^@chaos:\s(0?[1-9]|[1-2][0-9]|3[0-1])\/(0?[1-9]|1[0-2])$/.test(this.mainInput.textContent.trim())) {
+        const date = this.mainInput.textContent.trim().split(' ')[1];
+        const object = {
+          month: date.split('/')[1],
+          day: date.split('/')[0],
+        }
+        const facts = await this.getFactsNumber(object);
+        content = facts;
       }
       const data = {
         type: 'text_message',
@@ -739,8 +827,18 @@ export default class MainPage {
     })
   }
 
+  wsInterval() {
+    const data = JSON.stringify({
+      type: 'interval'
+    });
+    setInterval(() => {
+      this.ws.send(data);
+    }, 5000)
+  }
+
   onSocketConnect() {
     this.ws = new WebSocket(this.wsURL);
+    this.ws.binaryType = 'blob';
     this.ws.addEventListener('open', () => {
       const data = JSON.stringify({
         type: 'ping',
@@ -759,7 +857,7 @@ export default class MainPage {
         dialogID: this.activeChatID,
       });
       this.sidebar.init();
-
+      this.wsInterval();
     });
     this.ws.addEventListener('message', this.onWsMessage);
     this.ws.addEventListener('close', () => {
@@ -780,9 +878,9 @@ export default class MainPage {
       this.drawMessages(message);
       this.scrollToBottom();
       this.totalMessages = message.totalMessages;
+      return false;
     }
     if (message.type === 'text_message') {
-
       const { data } = message;
       this.messagesContent.innerHTML = '';
       this.drawMessages(data);
@@ -790,10 +888,12 @@ export default class MainPage {
       this.currentChunk = 0;
       this.fetching = false;
       this.totalMessages = data.totalMessages;
+      return false;
     }
     if (message.type === 'logout') {
       const { users } = message;
       this.redrawUsers(users);
+      return false;
     }
     if (message.type === 'more_messages') {
       const { data } = message;
@@ -801,7 +901,12 @@ export default class MainPage {
       this.scrollToLastMessage();
       this.fetching = false;
       this.totalMessages = data.totalMessages;
+      return false;
     }
+    if (message.type === 'interval') {
+      return false;
+    }
+    return false;
   }
 
   drawMessages(data) {
@@ -979,6 +1084,10 @@ export default class MainPage {
         <div class="messages-info__title">Список доступных команд:</div>
         <ul class="messages-info__list">
           <li class="messages-info__item"><span class="info__command">@chaos: погода</span><span class="info__text">запрос погоды</span></li>
+          <li class="messages-info__item"><span class="info__command">@chaos: курс</span><span class="info__text">запрос курса валют</span></li>
+          <li class="messages-info__item"><span class="info__command">@chaos: <ДЕНЬ>/<МЕСЯЦ></span><span class="info__text">запрос исторического факта об этой дате.<br>
+            Например: <span class="info__command">@chaos: 30/01</span></span>
+          </li>
         </ul>
         <button class="messages-info__button">ЗАКРЫТЬ</button>
       </div>
@@ -995,8 +1104,9 @@ export default class MainPage {
     let button;
     let filePreview;
     let fileTemplate;
-    let weatherClassname = className;
-    let weatherUserName = userName;
+    let chaosClassName = className;
+    let chaosUserName = userName;
+    let bodyID = '';
 
     if (encryption) {
       lockClassName = 'lock';
@@ -1017,9 +1127,20 @@ export default class MainPage {
         content = `<span class="coords">Координаты: [${message.latitude}, ${message.longitude}]</span><a class="coords-btn" href="http://www.google.com/maps/place/${message.latitude},${message.longitude}" target="_blank"></a>`
       }
       if (message.weather) {
-        weatherClassname = 'left';
-        weatherUserName = 'chaos';
+        chaosClassName = 'left';
+        chaosUserName = 'chaos';
         content = MainPage.weatherMarkup(message);
+      }
+      if (message.Valute) {
+        chaosClassName = 'left';
+        chaosUserName = 'chaos';
+        content = MainPage.exchangeMarkup(message);
+        bodyID = 'chaos';
+      }
+      if (message.text && message.year && message.type === 'date') {
+        chaosClassName = 'left';
+        chaosUserName = 'chaos';
+        content = message.text;
       }
     }
 
@@ -1074,10 +1195,10 @@ export default class MainPage {
       filePreview = '';
     }
 
-    return `<li class="message ${weatherClassname}" data-id="${mesID}">
-    <div class="message__body">
+    return `<li class="message ${chaosClassName}" data-id="${mesID}">
+    <div id="${bodyID}" class="message__body">
       <div class="message__header">
-        <div class="message__name">${weatherUserName}</div>
+        <div class="message__name">${chaosUserName}</div>
         <div class="message__date">${time}</div>
       </div>
       ${filePreview}
