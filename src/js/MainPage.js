@@ -13,7 +13,8 @@ export default class MainPage {
     this.container = element;
     this.baseURL = baseURL;
     this.ws = null;
-    this.wsURL = 'wss://ahj-chaos-organizer-sergius.herokuapp.com'
+    // this.wsURL = 'wss://ahj-chaos-organizer-sergius.herokuapp.com'
+    this.wsURL = 'ws://localhost:7070'
     this.appContent = null;
     this.userID = null;
     this.groupList = null;
@@ -74,7 +75,7 @@ export default class MainPage {
     this.onDecryptFormSubmit = this.onDecryptFormSubmit.bind(this);
   }
 
- async init(data) {
+  async init(data) {
     this.userID = data.user.id;
     this.container.insertAdjacentHTML('afterbegin', MainPage.startMarkUp);
     this.appContent = this.container.querySelector('.app__content');
@@ -397,8 +398,8 @@ export default class MainPage {
 
   // eslint-disable-next-line class-methods-use-this
   async getFactsNumber(object) {
-    const request = await fetch(`http://numbersapi.com/${object.month}/${object.day}/date?json`);
-    const response = await request.json()
+    const request = await fetch(`https://api.wikimedia.org/feed/v1/wikipedia/ru/onthisday/selected/${object.month}/${object.day}`);
+    const response = await request.json();
     return response;
   }
 
@@ -700,7 +701,7 @@ export default class MainPage {
     }
   }
 
- async onMaininputKeydown(evt) {
+  async onMaininputKeydown(evt) {
     if (evt.code === 'Enter') {
       evt.preventDefault();
       let content;
@@ -720,6 +721,13 @@ export default class MainPage {
         const rates = await this.getExchangeRates();
         content = rates;
       }
+      if (this.mainInput.textContent.trim() === '@chaos: фраза') {
+        const request = await fetch(`${this.baseURL}/phrase`);
+        const response = await request.json();
+        if (response.success) {
+          content = response.data;
+        }
+      }
       if (/^@chaos:\s(0?[1-9]|[1-2][0-9]|3[0-1])\/(0?[1-9]|1[0-2])$/.test(this.mainInput.textContent.trim())) {
         const date = this.mainInput.textContent.trim().split(' ')[1];
         const object = {
@@ -727,7 +735,8 @@ export default class MainPage {
           day: date.split('/')[0],
         }
         const facts = await this.getFactsNumber(object);
-        content = facts;
+        content = { facts, this_day: object };
+        console.log('content:', content)
       }
       const data = {
         type: 'text_message',
@@ -754,7 +763,7 @@ export default class MainPage {
     if (evt.target.closest('.btn-wrap')) {
       let content;
       let encryption;
-      
+
       if (this.encryption) {
         content = this.encryptMessage(this.mainInput.textContent, this.encryptPassword)
         encryption = true;
@@ -777,7 +786,7 @@ export default class MainPage {
           day: date.split('/')[0],
         }
         const facts = await this.getFactsNumber(object);
-        content = facts;
+        content = { facts, this_day: object };
       }
       const data = {
         type: 'text_message',
@@ -1085,7 +1094,8 @@ export default class MainPage {
         <ul class="messages-info__list">
           <li class="messages-info__item"><span class="info__command">@chaos: погода</span><span class="info__text">запрос погоды</span></li>
           <li class="messages-info__item"><span class="info__command">@chaos: курс</span><span class="info__text">запрос курса валют</span></li>
-          <li class="messages-info__item"><span class="info__command">@chaos: <ДЕНЬ>/<МЕСЯЦ></span><span class="info__text">запрос исторического факта об этой дате.<br>
+          <li class="messages-info__item"><span class="info__command">@chaos: фраза</span><span class="info__text">запрос рандомной хакерской фразы</span></li>
+          <li class="messages-info__item"><span class="info__command">@chaos: <ДЕНЬ>/<МЕСЯЦ></span><span class="info__text">запрос исторических фактов об этой дате.<br>
             Например: <span class="info__command">@chaos: 30/01</span></span>
           </li>
         </ul>
@@ -1097,6 +1107,15 @@ export default class MainPage {
 
   static emojiMarkup(emoji) {
     return `<li class="messages-emoji__item">${emoji}</li>`;
+  }
+
+  static factsMarkup(data) {
+    const container = document.createElement('div');
+    container.className = 'historicalFact';
+    data.forEach((elem) => {
+      container.insertAdjacentHTML('beforeend', `<div>В ${elem.year} году ${elem.text}</div>`)
+    });
+    return container;
   }
 
   messageMarkup(className, message, time, userName, mesID, fileObj = '', encryption, password) {
@@ -1137,10 +1156,16 @@ export default class MainPage {
         content = MainPage.exchangeMarkup(message);
         bodyID = 'chaos';
       }
-      if (message.text && message.year && message.type === 'date') {
+      if (message.facts) {
         chaosClassName = 'left';
         chaosUserName = 'chaos';
-        content = message.text;
+        let facts = '';
+        message.facts.selected.forEach((item) => {
+          facts += `<div>В ${item.year} году ${item.text}</div><br>`;
+        });
+        content = `<div>
+        <h3>В этот день ( ${message.this_day.day}.${message.this_day.month} ):</h3><br>
+        ${facts}</div>`
       }
     }
 

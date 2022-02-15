@@ -7,7 +7,8 @@ export default class LoginPage {
       throw new Error('element is not HTMLElement');
     }
     this.container = element;
-    this.baseURL = 'https://ahj-chaos-organizer-sergius.herokuapp.com';
+    // this.baseURL = 'https://ahj-chaos-organizer-sergius.herokuapp.com';
+    this.baseURL = 'http://localhost:7070';
     this.mainPage = new MainPage(this.container, this.baseURL);
 
     this.onLoginFormSubmit = this.onLoginFormSubmit.bind(this);
