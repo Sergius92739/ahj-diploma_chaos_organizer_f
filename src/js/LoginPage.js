@@ -23,6 +23,8 @@ export default class LoginPage {
     this.container.insertAdjacentHTML('beforeend', LoginPage.markupLogin);
     this.container.insertAdjacentHTML('beforeend', LoginPage.markupRegister);
     this.container.insertAdjacentHTML('beforeend', LoginPage.markupPopup);
+    this.container.insertAdjacentHTML('beforeend', LoginPage.markupLoading);
+    this.loadingPage = this.container.querySelector('.app__loading-page');
     this.popup = this.container.querySelector('.app__popup');
     this.popupContent = this.popup.querySelector('.app-popup__text')
     this.popupBtnClose = this.container.querySelector('.app-popup__button');
@@ -59,6 +61,7 @@ export default class LoginPage {
 
   async onLoginFormSubmit(evt) {
     evt.preventDefault();
+    this.loadingPage.classList.remove('d_none');
     const response = await fetch(`${this.baseURL}/login`, {
       method: 'POST',
       body: new FormData(this.loginForm),
@@ -66,6 +69,7 @@ export default class LoginPage {
     const result = await response.json();
     this.loginForm.reset();
     if (result.success) {
+      this.loadingPage.classList.add('d_none');
       this.hideLoginPage();
       this.mainPage.init(result.data);
       this.mainPage.btnLogout.addEventListener('click', this.onLogoutBtnClick);
@@ -83,6 +87,7 @@ export default class LoginPage {
 
   async onRegisterFormSubmit(evt) {
     evt.preventDefault();
+    this.loadingPage.classList.remove('d_none');
     URL.revokeObjectURL(this.blobURL);
     const formData = new FormData(this.registerForm);
     if (this.avatarElement.value) {
@@ -96,6 +101,7 @@ export default class LoginPage {
     const result = await response.json();
     this.registerForm.reset();
     if (result.success) {
+      this.loadingPage.classList.add('d_none');
       this.hideRegisterPage();
       this.mainPage.init(result.data);
       this.mainPage.btnLogout.addEventListener('click', this.onLogoutBtnClick);
@@ -128,6 +134,12 @@ export default class LoginPage {
         <button class="app-popup__button">ЗАКРЫТЬ</button>
       </div>
     </div>
+  </div>`
+  }
+
+  static get markupLoading() {
+    return `<div class="app__loading-page d_none">
+    <div class="app-loading_page__content"></div>
   </div>`
   }
 
