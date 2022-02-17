@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 import MainPage from "./MainPage";
+import Templates from "./Templates";
 
 export default class LoginPage {
   constructor(element) {
@@ -8,7 +9,6 @@ export default class LoginPage {
     }
     this.container = element;
     this.baseURL = 'https://ahj-chaos-organizer-sergius.herokuapp.com';
-    // this.baseURL = 'http://localhost:7070';
     this.mainPage = new MainPage(this.container, this.baseURL);
 
     this.onLoginFormSubmit = this.onLoginFormSubmit.bind(this);
@@ -21,10 +21,10 @@ export default class LoginPage {
 
   init() {
     this.container.innerHTML = '';
-    this.container.insertAdjacentHTML('beforeend', LoginPage.markupLogin);
-    this.container.insertAdjacentHTML('beforeend', LoginPage.markupRegister);
-    this.container.insertAdjacentHTML('beforeend', LoginPage.markupPopup);
-    this.container.insertAdjacentHTML('beforeend', LoginPage.markupLoading);
+    this.container.insertAdjacentHTML('beforeend', Templates.markupLogin);
+    this.container.insertAdjacentHTML('beforeend', Templates.markupRegister);
+    this.container.insertAdjacentHTML('beforeend', Templates.markupPopup);
+    this.container.insertAdjacentHTML('beforeend', Templates.markupLoading);
     this.loadingPage = this.container.querySelector('.app__loading-page');
     this.popup = this.container.querySelector('.app__popup');
     this.popupContent = this.popup.querySelector('.app-popup__text')
@@ -125,68 +125,5 @@ export default class LoginPage {
 
   showLoginPage() {
     this.loginElement.classList.remove('d_none');
-  }
-
-  static get markupPopup() {
-    return `<div class="app__popup d_none">
-    <div class="app-popup__body">
-      <div class="app-popup__content">
-        <div class="app-popup__text">
-        </div>
-        <button class="app-popup__button">ЗАКРЫТЬ</button>
-      </div>
-    </div>
-  </div>`
-  }
-
-  static get markupLoading() {
-    return `<div class="app__loading-page d_none">
-    <div class="app-loading_page__content"></div>
-  </div>`
-  }
-
-  static get markupRegister() {
-    return `<div class="app__register-page d_none">
-    <div class="register-page__body">
-      <div class="register-page__avatar-element">
-        <label for="avatar" class="register-page__avatar">
-          Загрузить аватар
-        </label>
-        <input id="avatar" type="file" class="register-page__file-element visually_hidden">
-      </div>
-      <form name="register_form" class="register-page__content">
-        <label class="register-page__item">
-          <div class="register-page__text">Логин</div>
-          <input name="login" class="login-page__input" type="text" required>
-        </label>
-        <label class="register-page__item">
-          <div class="register-page__text">Пароль</div>
-          <input name="password" class="login-page__input" type="password" required>
-        </label>
-        <button class="register-page__button">Зарегистрироваться</button>
-      </form>
-    </div>
-  </div>`
-  }
-
-  static get markupLogin() {
-    return `<div class="app__login-page">
-    <div class="login-page__body">
-      <form name="login_form" class="login-page__content">
-        <label class="login-page__item">
-          <div class="login-page__text">Логин</div>
-          <input name="login" class="login-page__input" type="text" required>
-        </label>
-        <label class="login-page__item">
-          <div class="login-page__text">Пароль</div>
-          <input name="password" class="login-page__input" type="password" required>
-        </label>
-        <button class="login-page__button">Войти</button>
-      </form>
-      <div class="register-page__register">
-        <button class="register-page__link">зарегистрироваться</button>
-      </div>
-    </div>
-  </div>`;
   }
 }

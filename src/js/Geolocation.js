@@ -1,26 +1,22 @@
 export default class Geolocation {
-  constructor() {
-    this.options = {
-      enableHighAccuracy: false,
-      timeout: 5000,
-      maximumAge: 0,
-    };
-  }
 
-  getLocation(callback) {
+  static getLocation(callback) {
     return new Promise((resolve) => {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
           (position) => resolve(Geolocation.succesHandler(position)),
           (error) => resolve(Geolocation.errorHandler(error, callback)),
-          this.options,
+          {
+            enableHighAccuracy: false,
+            timeout: 5000,
+            maximumAge: 0,
+          },
         );
       } else {
         const info = 'Ваш браузер не поддерживает геолокацию, смените браузер и повторите попытку.';
         resolve(callback(info));
       }
     })
-
   }
 
   static succesHandler(position) {
