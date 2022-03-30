@@ -1,7 +1,8 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable import/no-cycle */
 import { debounceTime, fromEvent, pluck, filter, switchMap } from "rxjs";
-import MainPage from "./MainPage";
+import Templates from "./Templates";
+import Utils from "./utils/utils";
 
 export default class Sidebar {
   constructor(container, options) {
@@ -20,7 +21,7 @@ export default class Sidebar {
 
   init() {
     this.appContent = this.container.querySelector('.app__content');
-    this.appContent.insertAdjacentHTML('beforeend', Sidebar.sidebarMarkup);
+    this.appContent.insertAdjacentHTML('beforeend', Templates.sidebarMarkup);
     this.messagesHeaderBtns = this.container.querySelector('.messages-header__buttons');
     this.sideBarSearch = this.container.querySelector('.app__sidebar.search-mes');
     this.sideBarInfo = this.container.querySelector('.app__sidebar.info');
@@ -151,7 +152,7 @@ export default class Sidebar {
     this.previewPhotos.innerHTML = '';
     this.numbPhotos.textContent = data.length;
     data.forEach((image) => {
-      this.previewPhotos.insertAdjacentHTML('beforeend', this.previewPhotoMarkup(image))
+      this.previewPhotos.insertAdjacentHTML('beforeend', Templates.previewPhotoMarkup(image, this.baseURL))
     })
   }
 
@@ -159,7 +160,7 @@ export default class Sidebar {
     this.previewVideos.innerHTML = '';
     this.numbVideo.textContent = data.length;
     data.forEach((video) => {
-      this.previewVideos.insertAdjacentHTML('beforeend', this.previewVideoMarkup(video))
+      this.previewVideos.insertAdjacentHTML('beforeend', Templates.previewVideoMarkup(video, this.baseURL))
     })
   }
 
@@ -167,7 +168,7 @@ export default class Sidebar {
     this.previewVoices.innerHTML = '';
     this.numbVoice.textContent = data.length;
     data.forEach((voice) => {
-      this.previewVoices.insertAdjacentHTML('beforeend', this.previewAudioMarkup(voice))
+      this.previewVoices.insertAdjacentHTML('beforeend', Templates.previewAudioMarkup(voice, this.baseURL))
     })
   }
 
@@ -175,7 +176,7 @@ export default class Sidebar {
     this.previewAudios.innerHTML = '';
     this.numbAudio.textContent = data.length;
     data.forEach((audio) => {
-      this.previewAudios.insertAdjacentHTML('beforeend', this.previewAudioMarkup(audio))
+      this.previewAudios.insertAdjacentHTML('beforeend', Templates.previewAudioMarkup(audio, this.baseURL))
     })
   }
 
@@ -183,7 +184,7 @@ export default class Sidebar {
     this.previewLinks.innerHTML = '';
     this.numbLink.textContent = data.length;
     data.forEach((elem) => {
-      this.previewLinks.insertAdjacentHTML('beforeend', Sidebar.previewLinkMarkup(elem));
+      this.previewLinks.insertAdjacentHTML('beforeend', Templates.previewLinkMarkup(elem));
     })
   }
 
@@ -322,127 +323,5 @@ export default class Sidebar {
       dialog = 'personal'
     }
     return dialog;
-  }
-
-  static get sidebarMarkup() {
-    return `<div class="app__sidebar search-mes d_none">
-    <div class="sidebar__header column_header">
-      <div class="btn-wrap">
-        <button class="button close-sb"></button>
-      </div>
-      <div class="sidebar-header__title">Поиск сообщений</div>
-    </div>
-    <form class="sidebar__search search" action="">
-      <label class="search__items">
-        <button class="search__button_on" data-id="sidebar_btn-on"></button>
-        <button class="search__button_of d_none" data-id="sidebar_btn-of"></button>
-        <input data-id="sidebar_search" type="text" class="search__input" placeholder="Поиск...">
-      </label>
-    </form>
-    <ul class="sidebar__found-list"></ul>
-  </div>
-  
-  <div class="app__sidebar info d_none">
-    <div class="sidebar__header column_header">
-      <div class="btn-wrap">
-        <button class="button close-sb"></button>
-      </div>
-      <div class="sidebar-header__title">Информация о чате</div>
-    </div>
-    <ul class="sidebar__attachments-list">
-      <li class="attachment" data-name="photo">
-        <div class="attachment__item">
-          <div class="attachment__icon photo"></div>
-          <div class="attachment__text">Фото :</div>
-        </div>
-        <div class="attachment__number" data-number="photo"></div>
-      </li>
-      <li class="attachment" data-name="video">
-        <div class="attachment__item">
-          <div class="attachment__icon video"></div>
-          <div class="attachment__text">Видео :</div>
-        </div>
-        <div class="attachment__number" data-number="video"></div>
-      </li>
-      <li class="attachment" data-name="file">
-        <div class="attachment__item">
-          <span class="attachment__icon file"></span>
-          <span class="attachment__text">Файлов :</span>
-        </div>
-        <div class="attachment__number" data-number="file"></div>
-      </li>
-      <li class="attachment" data-name="audio">
-        <div class="attachment__item">
-          <span class="attachment__icon audio"></span>
-          <span class="attachment__text">Аудиофайлов :</span>
-        </div>
-        <div class="attachment__number" data-number="audio"></div>
-      </li>
-      <li class="attachment" data-name="link">
-        <div class="attachment__item">
-          <span class="attachment__icon link"></span>
-          <span class="attachment__text">Ссылок :</span>
-        </div>
-        <div class="attachment__number" data-number="link"></div>
-      </li>
-      <li class="attachment" data-name="voice">
-        <div class="attachment__item">
-          <span class="attachment__icon voice"></span>
-          <span class="attachment__text">Голосовых сообщений :</span>
-        </div>
-        <div class="attachment__number" data-number="voice"></div>
-      </li>
-      <li class="attachment" data-name="gif">
-        <div class="attachment__item">
-          <span class="attachment__icon gif"></span>
-          <span class="attachment__text">GIF :</span>
-        </div>
-        <div class="attachment__number" data-number="gif"></div>
-      </li>
-    </ul>
-    <div class="sidebar__preview d_none" data-name="preview-menu">
-      <div class="sidebar-preview__header">
-        <div class="btn-wrap">
-          <button class="button back"></button>
-        </div>
-        <div class="sidebar-preview__title"></div>
-      </div>
-      <ul class="sidebar-preview__photo visually_hidden" data-id="photo"></ul>
-      <ul class="sidebar-preview__video visually_hidden" data-id="video"></ul>
-      <ul class="sidebar-preview__voice visually_hidden" data-id="voice"></ul>
-      <ul class="sidebar-preview__audio visually_hidden" data-id="audio"></ul>
-      <ul class="sidebar-preview__link visually_hidden" data-id="link"></ul>
-    </div>
-  </div>`
-  }
-
-  previewPhotoMarkup(fileName) {
-    return `<li class="photo__item"><a href="${this.baseURL}/${fileName}" target="_blank">
-    <img src="${this.baseURL}/${fileName}">
-  </a></li>`
-  }
-
-  previewVideoMarkup(fileName) {
-    return `<li class="video__item"><a href="${this.baseURL}/${fileName}" target="_blank">
-    <video src="${this.baseURL}/${fileName}" controls></video>
-  </a></li>`
-  }
-
-  previewAudioMarkup(fileName) {
-    return `<li class="voice__item"><audio src="${this.baseURL}/${fileName}" controls></audio>
-      <div class="btn-wrap">
-        <a class="button download" href="${this.baseURL}/${fileName}" download="${fileName}" rel="noopener"></a>
-      </div>
-    </li> `
-  }
-
-  static previewLinkMarkup(elem) {
-    return `<li class="link__item">
-    <div class="link-item__img"></div>
-    <div class="link-item__content">
-      <div class="link-item__data">${elem.time}</div>
-      <div class="link-item__link">${MainPage.getLink(elem.message)}</div>
-    </div>
-  </li>`
   }
 }

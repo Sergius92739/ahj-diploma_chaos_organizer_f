@@ -1,3 +1,5 @@
+import Utils from "./utils/utils";
+
 export default class Templates {
   static exchangeMarkup(data) {
     const { Valute } = data;
@@ -369,5 +371,127 @@ export default class Templates {
       </div>
     </div>
   </div>`;
+  }
+
+  static get sidebarMarkup() {
+    return `<div class="app__sidebar search-mes d_none">
+    <div class="sidebar__header column_header">
+      <div class="btn-wrap">
+        <button class="button close-sb"></button>
+      </div>
+      <div class="sidebar-header__title">Поиск сообщений</div>
+    </div>
+    <form class="sidebar__search search" action="">
+      <label class="search__items">
+        <button class="search__button_on" data-id="sidebar_btn-on"></button>
+        <button class="search__button_of d_none" data-id="sidebar_btn-of"></button>
+        <input data-id="sidebar_search" type="text" class="search__input" placeholder="Поиск...">
+      </label>
+    </form>
+    <ul class="sidebar__found-list"></ul>
+  </div>
+  
+  <div class="app__sidebar info d_none">
+    <div class="sidebar__header column_header">
+      <div class="btn-wrap">
+        <button class="button close-sb"></button>
+      </div>
+      <div class="sidebar-header__title">Информация о чате</div>
+    </div>
+    <ul class="sidebar__attachments-list">
+      <li class="attachment" data-name="photo">
+        <div class="attachment__item">
+          <div class="attachment__icon photo"></div>
+          <div class="attachment__text">Фото :</div>
+        </div>
+        <div class="attachment__number" data-number="photo"></div>
+      </li>
+      <li class="attachment" data-name="video">
+        <div class="attachment__item">
+          <div class="attachment__icon video"></div>
+          <div class="attachment__text">Видео :</div>
+        </div>
+        <div class="attachment__number" data-number="video"></div>
+      </li>
+      <li class="attachment" data-name="file">
+        <div class="attachment__item">
+          <span class="attachment__icon file"></span>
+          <span class="attachment__text">Файлов :</span>
+        </div>
+        <div class="attachment__number" data-number="file"></div>
+      </li>
+      <li class="attachment" data-name="audio">
+        <div class="attachment__item">
+          <span class="attachment__icon audio"></span>
+          <span class="attachment__text">Аудиофайлов :</span>
+        </div>
+        <div class="attachment__number" data-number="audio"></div>
+      </li>
+      <li class="attachment" data-name="link">
+        <div class="attachment__item">
+          <span class="attachment__icon link"></span>
+          <span class="attachment__text">Ссылок :</span>
+        </div>
+        <div class="attachment__number" data-number="link"></div>
+      </li>
+      <li class="attachment" data-name="voice">
+        <div class="attachment__item">
+          <span class="attachment__icon voice"></span>
+          <span class="attachment__text">Голосовых сообщений :</span>
+        </div>
+        <div class="attachment__number" data-number="voice"></div>
+      </li>
+      <li class="attachment" data-name="gif">
+        <div class="attachment__item">
+          <span class="attachment__icon gif"></span>
+          <span class="attachment__text">GIF :</span>
+        </div>
+        <div class="attachment__number" data-number="gif"></div>
+      </li>
+    </ul>
+    <div class="sidebar__preview d_none" data-name="preview-menu">
+      <div class="sidebar-preview__header">
+        <div class="btn-wrap">
+          <button class="button back"></button>
+        </div>
+        <div class="sidebar-preview__title"></div>
+      </div>
+      <ul class="sidebar-preview__photo visually_hidden" data-id="photo"></ul>
+      <ul class="sidebar-preview__video visually_hidden" data-id="video"></ul>
+      <ul class="sidebar-preview__voice visually_hidden" data-id="voice"></ul>
+      <ul class="sidebar-preview__audio visually_hidden" data-id="audio"></ul>
+      <ul class="sidebar-preview__link visually_hidden" data-id="link"></ul>
+    </div>
+  </div>`
+  }
+
+  static previewPhotoMarkup(image, baseURL) {
+    return `<li class="photo__item"><a href="${baseURL}/${image}" target="_blank">
+    <img src="${baseURL}/${image}">
+  </a></li>`
+  }
+
+  static previewVideoMarkup(fileName, baseURL) {
+    return `<li class="video__item"><a href="${baseURL}/${fileName}" target="_blank">
+    <video src="${baseURL}/${fileName}" controls></video>
+  </a></li>`
+  }
+
+  static previewAudioMarkup(fileName, baseURL) {
+    return `<li class="voice__item"><audio src="${baseURL}/${fileName}" controls></audio>
+      <div class="btn-wrap">
+        <a class="button download" href="${baseURL}/${fileName}" download="${fileName}" rel="noopener"></a>
+      </div>
+    </li> `
+  }
+
+  static previewLinkMarkup(elem) {
+    return `<li class="link__item">
+    <div class="link-item__img"></div>
+    <div class="link-item__content">
+      <div class="link-item__data">${elem.time}</div>
+      <div class="link-item__link">${Utils.getLink(elem.message)}</div>
+    </div>
+  </li>`
   }
 }

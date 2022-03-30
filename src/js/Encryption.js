@@ -16,6 +16,7 @@ export default class Encryption {
     this.mesDecryptFormInput = this.container.querySelector('.messages-decrypt-form__input');
     this.mesFormButtonClose = this.container.querySelector('.messages-encrypt-form__btn-close');
     this.popup = this.container.querySelector('.app__popup');
+    this.popupContent = this.popup.querySelector('.app-popup__text');
     this.messagesContent = this.container.querySelector('.messages__content');
     this.groupList = this.container.querySelector('.chats__group-list');
     this.baseURL = url;
