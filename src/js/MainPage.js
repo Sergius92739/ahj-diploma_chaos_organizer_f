@@ -17,7 +17,7 @@ export default class MainPage {
     }
     this.container = element;
     this.baseURL = baseURL;
-    this.wsURL = 'wss://ahj-chaos-organizer-sergius.herokuapp.com'
+    this.wsURL = 'wss://chaos-organizer.sergem.xyz'
     this.currentChunk = 0;
     this.fetching = false;
     this.decryption = false;
