@@ -21,7 +21,7 @@ export default class MainPage {
     this.currentChunk = 0;
     this.fetching = false;
     this.decryption = false;
-    // this.weatherKey = 'eca3c39a199c6467336e7a5e2a1db49e';
+    this.weatherKey = 'eca3c39a199c6467336e7a5e2a1db49e';
     this.showPopup = this.showPopup.bind(this);
   }
 
