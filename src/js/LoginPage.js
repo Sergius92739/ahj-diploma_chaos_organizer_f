@@ -13,7 +13,7 @@ export default class LoginPage {
 
     this.onLoginFormSubmit = this.onLoginFormSubmit.bind(this);
     this.onRegisterBtnClick = this.onRegisterBtnClick.bind(this);
-    this.onRegisterFormSubmit = this.:onRegisterFormSubmit.bind(this);
+    this.onRegisterFormSubmit = this.onRegisterFormSubmit.bind(this);
     this.onPopupBtnCloseClick = this.onPopupBtnCloseClick.bind(this);
     this.onLogoutBtnClick = this.onLogoutBtnClick.bind(this);
     this.onChange = this.onChange.bind(this);
