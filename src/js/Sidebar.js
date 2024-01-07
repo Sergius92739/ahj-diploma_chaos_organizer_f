@@ -10,7 +10,7 @@ export default class Sidebar {
     this.ws = options.ws;
     this.activeChatID = options.dialogID;
     this.userID = options.user;
-    this.baseURL = 'https://chaos-organizer.sergem.xyz';
+    this.baseURL = 'https://ahj-diploma-chaos-organizer.onrender.com';
 
     this.onMessagesHeaderBtnsClick = this.onMessagesHeaderBtnsClick.bind(this);
     this.onBackBtnClick = this.onBackBtnClick.bind(this);
