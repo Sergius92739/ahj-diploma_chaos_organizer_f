@@ -8,12 +8,12 @@ export default class LoginPage {
       throw new Error('element is not HTMLElement');
     }
     this.container = element;
-    this.baseURL = 'https://chaos-organizer.sergem.xyz';
+    this.baseURL = 'https://ahj-diploma-chaos-organizer.onrender.com';
     this.mainPage = new MainPage(this.container, this.baseURL);
 
     this.onLoginFormSubmit = this.onLoginFormSubmit.bind(this);
     this.onRegisterBtnClick = this.onRegisterBtnClick.bind(this);
-    this.onRegisterFormSubmit = this.onRegisterFormSubmit.bind(this);
+    this.onRegisterFormSubmit = this.:onRegisterFormSubmit.bind(this);
     this.onPopupBtnCloseClick = this.onPopupBtnCloseClick.bind(this);
     this.onLogoutBtnClick = this.onLogoutBtnClick.bind(this);
     this.onChange = this.onChange.bind(this);
