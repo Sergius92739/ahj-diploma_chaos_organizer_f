@@ -17,7 +17,7 @@ export default class MainPage {
     }
     this.container = element;
     this.baseURL = baseURL;
-    this.wsURL = 'wss://chaos-organizer.sergem.xyz'
+    this.wsURL = 'wss://ahj-diploma-chaos-organizer.onrender.com'
     this.currentChunk = 0;
     this.fetching = false;
     this.decryption = false;
