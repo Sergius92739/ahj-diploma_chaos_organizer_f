@@ -337,7 +337,7 @@ export default class Templates {
         </label>
         <input id="avatar" type="file" class="register-page__file-element visually_hidden">
       </div>
-      <form name="register_form" class="register-page__content">
+      <form name="register_form" method="post" class="register-page__content">
         <label class="register-page__item">
           <div class="register-page__text">Логин</div>
           <input name="login" class="login-page__input" type="text" required>
@@ -355,7 +355,7 @@ export default class Templates {
   static get markupLogin() {
     return `<div class="app__login-page">
     <div class="login-page__body">
-      <form name="login_form" class="login-page__content">
+      <form name="login_form" method="post" class="login-page__content">
         <label class="login-page__item">
           <div class="login-page__text">Логин</div>
           <input name="login" class="login-page__input" type="text" required>
